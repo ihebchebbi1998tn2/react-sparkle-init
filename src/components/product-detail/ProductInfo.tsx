@@ -13,7 +13,7 @@ const ProductInfo = ({ name, description, price }: ProductInfoProps) => {
       <motion.h1 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-['WomanFontBold'] text-gray-900"
+        className="text-3xl font-['WomanFontBold'] text-gray-900 leading-tight"
       >
         {name}
       </motion.h1>
@@ -27,7 +27,7 @@ const ProductInfo = ({ name, description, price }: ProductInfoProps) => {
       <motion.p 
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-gray-600 leading-relaxed"
+        className="text-gray-600 leading-relaxed text-base"
       >
         {description}
       </motion.p>
