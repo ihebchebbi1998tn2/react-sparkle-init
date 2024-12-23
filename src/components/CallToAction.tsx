@@ -11,7 +11,7 @@ const CallToAction = () => {
         <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
           Join thousands of developers building amazing projects
         </p>
-        <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+        <Button className="bg-white text-primary hover:bg-gray-100">
           Start Building Now
         </Button>
       </div>
