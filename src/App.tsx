@@ -17,6 +17,7 @@ const PaymentSuccessPage = React.lazy(() => import('./pages/PaymentSuccessPage')
 const PaymentFailurePage = React.lazy(() => import('./pages/PaymentFailurePage'));
 const PromoCodesPage = React.lazy(() => import('./pages/PromoCodesPage'));
 const OrderPreviewPage = React.lazy(() => import('./pages/OrderPreviewPage'));
+const ProductDetailPage = React.lazy(() => import('./pages/ProductDetailPage'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -68,6 +69,14 @@ const App = () => (
                   element={
                     <Suspense fallback={<PageLoader />}>
                       <CategoryPage />
+                    </Suspense>
+                  } 
+                />
+                <Route 
+                  path="/product/:id" 
+                  element={
+                    <Suspense fallback={<PageLoader />}>
+                      <ProductDetailPage />
                     </Suspense>
                   } 
                 />
