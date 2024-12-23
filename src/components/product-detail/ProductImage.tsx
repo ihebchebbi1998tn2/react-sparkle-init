@@ -11,13 +11,15 @@ const ProductImage = ({ image, name }: ProductImageProps) => {
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
-      className="aspect-square bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100"
+      className="sticky top-8"
     >
-      <img
-        src={image}
-        alt={name}
-        className="w-full h-full object-contain mix-blend-normal p-4"
-      />
+      <div className="aspect-square bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-contain mix-blend-normal p-4"
+        />
+      </div>
     </motion.div>
   );
 };

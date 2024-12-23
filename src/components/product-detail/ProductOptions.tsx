@@ -1,6 +1,8 @@
 import React from 'react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Minus, Plus } from "lucide-react";
 
 interface ProductOptionsProps {
   selectedSize: string;
@@ -21,52 +23,77 @@ const ProductOptions = ({
 }: ProductOptionsProps) => {
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <Label htmlFor="size" className="text-sm font-medium text-gray-700">Size</Label>
-        <Select value={selectedSize} onValueChange={setSelectedSize}>
-          <SelectTrigger className="w-full bg-white border-gray-200 hover:border-[#700100] transition-colors">
-            <SelectValue placeholder="Select size" />
-          </SelectTrigger>
-          <SelectContent>
-            {['S', 'M', 'L', 'XL', '2XL', '3XL'].map((size) => (
-              <SelectItem key={size} value={size} className="cursor-pointer hover:bg-gray-50">
+      <div className="space-y-4">
+        <Label className="text-sm font-medium text-gray-700">Size</Label>
+        <RadioGroup
+          value={selectedSize}
+          onValueChange={setSelectedSize}
+          className="grid grid-cols-6 gap-2"
+        >
+          {['S', 'M', 'L', 'XL', '2XL', '3XL'].map((size) => (
+            <div key={size}>
+              <RadioGroupItem
+                value={size}
+                id={`size-${size}`}
+                className="peer sr-only"
+              />
+              <Label
+                htmlFor={`size-${size}`}
+                className="flex h-10 w-full cursor-pointer items-center justify-center rounded-md border-2 border-gray-200 bg-white text-sm font-medium transition-all peer-checked:border-[#700100] peer-checked:bg-[#700100] peer-checked:text-white hover:bg-gray-50"
+              >
                 {size}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+              </Label>
+            </div>
+          ))}
+        </RadioGroup>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="color" className="text-sm font-medium text-gray-700">Color</Label>
-        <Select value={selectedColor} onValueChange={setSelectedColor}>
-          <SelectTrigger className="w-full bg-white border-gray-200 hover:border-[#700100] transition-colors">
-            <SelectValue placeholder="Select color" />
-          </SelectTrigger>
-          <SelectContent>
-            {['Black', 'White', 'Red', 'Blue', 'Green'].map((color) => (
-              <SelectItem key={color} value={color} className="cursor-pointer hover:bg-gray-50">
+      <div className="space-y-4">
+        <Label className="text-sm font-medium text-gray-700">Color</Label>
+        <RadioGroup
+          value={selectedColor}
+          onValueChange={setSelectedColor}
+          className="grid grid-cols-4 gap-2"
+        >
+          {['Black', 'White', 'Red', 'Blue'].map((color) => (
+            <div key={color}>
+              <RadioGroupItem
+                value={color}
+                id={`color-${color}`}
+                className="peer sr-only"
+              />
+              <Label
+                htmlFor={`color-${color}`}
+                className="flex h-10 w-full cursor-pointer items-center justify-center rounded-md border-2 border-gray-200 bg-white text-sm font-medium transition-all peer-checked:border-[#700100] peer-checked:bg-[#700100] peer-checked:text-white hover:bg-gray-50"
+              >
                 {color}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+              </Label>
+            </div>
+          ))}
+        </RadioGroup>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="quantity" className="text-sm font-medium text-gray-700">Quantity</Label>
-        <Select value={quantity.toString()} onValueChange={(value) => setQuantity(Number(value))}>
-          <SelectTrigger className="w-full bg-white border-gray-200 hover:border-[#700100] transition-colors">
-            <SelectValue placeholder="Select quantity" />
-          </SelectTrigger>
-          <SelectContent>
-            {[1, 2, 3, 4, 5].map((num) => (
-              <SelectItem key={num} value={num.toString()} className="cursor-pointer hover:bg-gray-50">
-                {num}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <div className="space-y-4">
+        <Label className="text-sm font-medium text-gray-700">Quantity</Label>
+        <div className="flex items-center space-x-4">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+            className="h-10 w-10 rounded-md border-2 border-gray-200"
+          >
+            <Minus className="h-4 w-4" />
+          </Button>
+          <span className="w-12 text-center text-lg font-medium">{quantity}</span>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setQuantity(Math.min(10, quantity + 1))}
+            className="h-10 w-10 rounded-md border-2 border-gray-200"
+          >
+            <Plus className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
     </div>
   );

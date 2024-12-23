@@ -6,11 +6,8 @@ import { useCart } from '@/components/cart/CartProvider';
 import PersonalizationInput from '@/components/cart/PersonalizationInput';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
-import { ArrowLeft, ShoppingCart, Check } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Check, Star, Shield, Truck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import TopNavbar from '@/components/TopNavbar';
-import Footer from '@/components/Footer';
-import { playTickSound } from '@/utils/audio';
 import ProductImage from '@/components/product-detail/ProductImage';
 import ProductInfo from '@/components/product-detail/ProductInfo';
 import ProductOptions from '@/components/product-detail/ProductOptions';
@@ -41,7 +38,6 @@ const ProductDetailPage = () => {
       return;
     }
 
-    playTickSound();
     addToCart({
       id: product!.id,
       name: product!.name,
@@ -84,19 +80,17 @@ const ProductDetailPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <TopNavbar />
-      
-      <main className="flex-grow container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-8"
+          className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-8 group"
         >
-          <ArrowLeft size={24} />
-          <span>Back</span>
+          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+          <span>Back to Products</span>
         </button>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12">
           <ProductImage image={product.image} name={product.name} />
 
           <div className="space-y-8">
@@ -105,6 +99,19 @@ const ProductDetailPage = () => {
               description={product.description}
               price={product.price}
             />
+
+            <div className="flex items-center gap-4 text-sm text-gray-600">
+              <div className="flex items-center gap-1">
+                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <span className="ml-2">(150+ reviews)</span>
+              </div>
+            </div>
+
+            <div className="h-px bg-gray-200" />
 
             <ProductOptions
               selectedSize={selectedSize}
@@ -117,38 +124,56 @@ const ProductDetailPage = () => {
 
             <PersonalizationInput itemId={product.id} onUpdate={() => {}} />
 
-            <AnimatePresence>
-              <motion.div
-                initial={false}
-                animate={{ scale: isAdded ? 0.95 : 1 }}
-                transition={{ duration: 0.1 }}
-              >
-                <Button
-                  onClick={handleAddToCart}
-                  className="w-full h-12 bg-[#700100] hover:bg-[#590000] text-white transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg"
-                  disabled={isAdded}
+            <div className="space-y-4">
+              <AnimatePresence>
+                <motion.div
+                  initial={false}
+                  animate={{ scale: isAdded ? 0.95 : 1 }}
+                  transition={{ duration: 0.1 }}
                 >
-                  <span className="flex items-center justify-center gap-2">
-                    {isAdded ? (
-                      <>
-                        <Check className="w-5 h-5" />
-                        Added to Cart
-                      </>
-                    ) : (
-                      <>
-                        <ShoppingCart className="w-5 h-5" />
-                        Add to Cart
-                      </>
-                    )}
-                  </span>
-                </Button>
-              </motion.div>
-            </AnimatePresence>
+                  <Button
+                    onClick={handleAddToCart}
+                    className="w-full h-14 bg-[#700100] hover:bg-[#590000] text-white text-lg transition-all duration-300 relative overflow-hidden shadow-md hover:shadow-lg rounded-lg"
+                    disabled={isAdded}
+                  >
+                    <span className="flex items-center justify-center gap-2">
+                      {isAdded ? (
+                        <>
+                          <Check className="w-5 h-5" />
+                          Added to Cart
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingCart className="w-5 h-5" />
+                          Add to Cart - {product.price} TND
+                        </>
+                      )}
+                    </span>
+                  </Button>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4 pt-6">
+              <div className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
+                <Truck className="w-6 h-6 text-[#700100] mb-2" />
+                <span className="text-sm font-medium">Fast Delivery</span>
+                <span className="text-xs text-gray-500">2-4 business days</span>
+              </div>
+              <div className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
+                <Shield className="w-6 h-6 text-[#700100] mb-2" />
+                <span className="text-sm font-medium">Quality Guarantee</span>
+                <span className="text-xs text-gray-500">100% authentic</span>
+              </div>
+              <div className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
+                <Star className="w-6 h-6 text-[#700100] mb-2" />
+                <span className="text-sm font-medium">Premium Quality</span>
+                <span className="text-xs text-gray-500">Best materials</span>
+              </div>
+            </div>
           </div>
         </div>
-      </main>
-
-      <Footer />
+      </div>
     </div>
   );
 };

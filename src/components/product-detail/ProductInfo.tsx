@@ -13,24 +13,24 @@ const ProductInfo = ({ name, description, price }: ProductInfoProps) => {
       <motion.h1 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-['WomanFontBold'] text-[#591C1C]"
+        className="text-3xl font-['WomanFontBold'] text-gray-900"
       >
         {name}
       </motion.h1>
-      <motion.p 
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-gray-600"
-      >
-        {description}
-      </motion.p>
       <motion.div 
         initial={{ opacity: 0, y: -5 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-2xl font-bold text-black"
+        className="text-3xl font-bold text-[#700100]"
       >
         {price} TND
       </motion.div>
+      <motion.p 
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-gray-600 leading-relaxed"
+      >
+        {description}
+      </motion.p>
     </div>
   );
 };
