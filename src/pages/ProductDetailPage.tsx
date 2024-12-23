@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllProducts } from '@/services/productsApi';
 import { useCart } from '@/components/cart/CartProvider';
-import { PersonalizationInput } from '@/components/cart/PersonalizationInput';
+import PersonalizationInput from '@/components/cart/PersonalizationInput';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from '@/components/ui/use-toast';
